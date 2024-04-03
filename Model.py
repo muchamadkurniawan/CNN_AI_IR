@@ -30,21 +30,21 @@ class Model_CNN_IR:
         #create CNN model
         model = tf.keras.Sequential([
             tf.keras.layers.Input(shape=input_shape),
-            tf.keras.layers.Conv2D(10, kernel_size=(3, 3),activation='relu'),
+            tf.keras.layers.Conv2D(32, kernel_size=(3, 3),activation='relu'),
             tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
-            tf.keras.layers.Conv2D(10, kernel_size=(3, 3), activation='relu'),
+            tf.keras.layers.Conv2D(24, kernel_size=(3, 3), activation='relu'),
             tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
-            tf.keras.layers.Conv2D(5, kernel_size=(3, 3), activation='relu'),
+            tf.keras.layers.Conv2D(12, kernel_size=(3, 3), activation='relu'),
             tf.keras.layers.Flatten(),
-            tf.keras.layers.Dense(16, activation='relu'),
-            tf.keras.layers.Dense(8, activation='relu'),
+            tf.keras.layers.Dense(100, activation='relu'),
+            tf.keras.layers.Dense(10, activation='relu'),
             tf.keras.layers.Dense(output_dim, activation='softmax')
         ])
         model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
         self.model = model
 
     def train_model(self):
-        self.history = self.model.fit(self.x_train, self.y_train, epochs=300, verbose=1)
+        self.history = self.model.fit(self.x_train, self.y_train, epochs=100, verbose=1)
 
     def model_summary(self):
         self.model.summary()
